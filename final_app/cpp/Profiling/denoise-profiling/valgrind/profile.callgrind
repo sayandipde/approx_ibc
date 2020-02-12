@@ -1,0 +1,21 @@
+# callgrind format
+version: 1
+creator: callgrind-3.15.0
+pid: 3810
+cmd:  ./denoise_single.o imgs/dem.output.png 3 3 0.12 imgs/den.output.png
+part: 2
+
+
+desc: I1 cache: 
+desc: D1 cache: 
+desc: LL cache: 
+
+desc: Timerange: Basic block 16337068 - 16351453
+desc: Trigger: Program termination
+
+positions: instr line
+events: Ir
+summary: 0
+
+
+totals: 0
