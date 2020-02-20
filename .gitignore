@@ -1,0 +1,10 @@
+/include/auto_schedule_*
+*.o
+*.a
+*.schedule
+*.log
+linux-smohamed
+*.pub
+cpp_vrep_main
+imacs
+/out_imgs/*

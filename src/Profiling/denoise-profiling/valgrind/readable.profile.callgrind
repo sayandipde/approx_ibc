@@ -1,0 +1,31 @@
+--------------------------------------------------------------------------------
+Profile data file 'valgrind/profile.callgrind.1' (creator: callgrind-3.15.0)
+--------------------------------------------------------------------------------
+I1 cache: 
+D1 cache: 
+LL cache: 
+Timerange: Basic block 0 - 16337068
+Trigger: Client Request
+Profiled target:  ./denoise_single.o imgs/dem.output.png 3 3 0.12 imgs/den.output.png (PID 3810, part 1)
+Events recorded:  Ir
+Events shown:     Ir
+Event sort order: Ir
+Thresholds:       90
+Include dirs:     
+User annotated:   
+Auto-annotation:  off
+
+--------------------------------------------------------------------------------
+Ir                  
+--------------------------------------------------------------------------------
+10,893,950 (100.0%)  PROGRAM TOTALS
+
+--------------------------------------------------------------------------------
+Ir                  file:function
+--------------------------------------------------------------------------------
+7,609,203 (69.85%)  ???:nl_means.par_for.sum$2.s1.dy.par_for.sum$2.s1.dx [/home/sayandipde/Approx_IBC/final_app/cpp/Profiling/denoise-profiling/denoise_single.o]
+  864,290 ( 7.93%)  ???:nl_means.par_for.sum.s1.dy.par_for.sum.s1.dx [/home/sayandipde/Approx_IBC/final_app/cpp/Profiling/denoise-profiling/denoise_single.o]
+  701,694 ( 6.44%)  ???:nl_means.par_for.sum.s0.dy.par_for.sum.s0.dx [/home/sayandipde/Approx_IBC/final_app/cpp/Profiling/denoise-profiling/denoise_single.o]
+  437,284 ( 4.01%)  /build/glibc-OTsEL5/glibc-2.27/malloc/malloc.c:free [/lib/x86_64-linux-gnu/libc-2.27.so]
+  317,556 ( 2.91%)  ???:nl_means.par_for.repeat_edge.s0._2.par_for.repeat_edge.s0._1 [/home/sayandipde/Approx_IBC/final_app/cpp/Profiling/denoise-profiling/denoise_single.o]
+
