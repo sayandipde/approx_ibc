@@ -20,6 +20,14 @@ Tested with the following versions:
 5. Install VREP
 6. Run IMACS
 
+Initially, clone this repository:
+```
+git clone https://github.com/sayandipde/approx_ibc.git
+cd approx_ibc
+pwd
+```
+For brevity, `$(root)=pwd`, i.e. the path to `approx_ibc` is called as `$(root)` or `$(IMACSROOT)`. 
+
 # 1-5 Dependencies
 
 ## 1. Dependent libraries
@@ -48,9 +56,13 @@ sudo apt-get install libqt4-dev
 
 ## 2. Installing Halide
 
-If already installed, only export the paths of `Halide/bin` and `Halide/distrib/bin` to `LD_LIBRARY_PATH`. Not that for our framework, we use a specific checkout version `git checkout 810a14b1cef3eb99c4051a2a7ca0c50a9872c37c`. If you are using the latest version, you may have to adapt the syntax in the source files.
+If already installed, only export the paths of `Halide/bin` and `Halide/distrib/bin` to `LD_LIBRARY_PATH`. 
+
+Note that for our framework, we use a specific checkout version `git checkout 810a14b1cef3eb99c4051a2a7ca0c50a9872c37c`. If you are using the latest version, you may have to adapt the syntax in the source files.
+
 For more details, https://github.com/halide/Halide/blob/master/README.md.
-If not installed, follow the steps below.
+
+If not already installed, follow the steps below.
 
 Building Halide
 ===============
@@ -89,6 +101,8 @@ source the paths for this to take effect.
 ```
 source /etc/environment
 ```
+
+If you do not have `sudo` rights, please follow the steps in `FAQ 4`.
 #### 2.1.2 Building Halide with make
 
 With `LLVM_CONFIG` set (or `llvm-config` in your path), you should be
@@ -148,7 +162,8 @@ echo 'export PATH="/usr/lib/ccache:$PATH"' | tee -a ~/.bashrc
 source ~/.bashrc && echo $PATH
 ```
 ### 3.2 Install java
-https://www.digitalocean.com/community/tutorials/how-to-install-java-with-apt-on-ubuntu-18-04
+If not already installed, you can follow the steps from here: https://www.digitalocean.com/community/tutorials/how-to-install-java-with-apt-on-ubuntu-18-04.
+
 In case there is an error: unable to locate `*.jar`
 ```
 sudo apt install default-jre
