@@ -9,6 +9,7 @@ OPENCV_PATH = /home/sajid/apps/opencv
 HALIDE_PATH = /home/sajid/apps/Halide
 VREP_PATH   = $$IMACSROOT/externalApps/vrep
 EIGEN_PATH  = $$IMACSROOT/externalApps/eigen
+PKG_CONFIG_PATH = /usr/lib/pkgconfig
 
 DEFINES -= UNICODE
 CONFIG   += console
@@ -61,7 +62,7 @@ unix:!macx {
     LIBS += -lm
     LIBS += `pkg-config opencv --cflags --libs`
     LIBS += -L/usr/lib
-    LIBS += -L/usr/lib/pkgconfig
+    LIBS += -L$$PKG_CONFIG_PATH
     LIBS += -L$$OPENCV_PATH -ljpeg
     LIBS += -L$$HALIDE_PATH/bin -lHalide
     LIBS += `libpng-config --cflags --ldflags`
@@ -88,7 +89,7 @@ INCLUDEPATH += "$$EIGEN_PATH"
 INCLUDEPATH += "$$IMACSROOT/src/cpp_vrep_api"
 INCLUDEPATH += "$$IMACSROOT/include"
 INCLUDEPATH += "$$HALIDE_PATH/include"
-INCLUDEPATH += "/usr/lib/pkgconfig"
+INCLUDEPATH += "$$PKG_CONFIG_PATH"
 INCLUDEPATH += "$$HALIDE_PATH/tools"
 INCLUDEPATH += "$$IMACSROOT/src/ReversiblePipeline/src"
 INCLUDEPATH += "$$IMACSROOT/src/LaneDetection_and_Control"
