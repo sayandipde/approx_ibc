@@ -2,6 +2,7 @@
 IMACSROOT = /home/sajid/Desktop/cppvrepimacs
 HALIDE_PATH = /home/sajid/apps/Halide
 OPENCV_PATH = /home/sajid/apps/opencv
+PKG_CONFIG_PATH =/usr/lib/pkgconfig
 
 INSTALLDIR  = ../bin
 
@@ -22,7 +23,7 @@ CFLAGS   := -g -D_GLIBCXX_USE_CXX11_ABI=0
 LDFLAGS  := -L /usr/local/lib -ljpeg
 LDLIBS   := -fno-rtti -lpthread -ldl -ltinfo -lz -lm
 HALIDE_FLAGS := -I$(HALIDE_PATH)/include -I$(HALIDE_PATH)/tools -L$(HALIDE_PATH)/bin -lHalide
-OPENCV_FLAGS := -frtti -L$(OPENCV_PATH)/include -L$(OPENCV_PATH)/build/include -L$(OPENCV_PATH)/build/lib -L /usr/lib/pkgconfig
+OPENCV_FLAGS := -frtti -L$(OPENCV_PATH)/include -L$(OPENCV_PATH)/build/include -L$(OPENCV_PATH)/build/lib -L $(PKG_CONFIG_PATH)
 PROFILER_FLAGS :=  -DPROFILEWITHCHRONO
 
 COMPILE_COMMAND := $(CXX) $^ $(HALIDE_PATH)/tools/GenGen.cpp $(CPPFLAGS)  $(HALIDE_FLAGS) $(CFLAGS) $(LDFLAGS)  `libpng-config --cflags --ldflags` `pkg-config opencv --cflags --libs` $(LDLIBS) -o $@ -std=c++11
