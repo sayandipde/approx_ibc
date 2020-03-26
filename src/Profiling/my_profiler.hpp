@@ -1,3 +1,34 @@
+/*
+ *  Copyright (c) 2020 sayandipde
+ *  Eindhoven University of Technology
+ *  Eindhoven, The Netherlands
+ *
+ *  Name            :   image_signal_processing.cpp
+ *
+ *  Authors         :   Sayandip De (sayandip.de@tue.nl)
+ *						Sajid Mohamed (s.mohamed@tue.nl)
+ *
+ *  Date            :   March 26, 2020
+ *
+ *  Function        :   run cpu profiling for benchmarking
+ *
+ *  History         :
+ *      26-03-20    :   Initial version. 
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ */
+
 #include <vector>
 #include <numeric>
 #include <algorithm> 
@@ -30,23 +61,9 @@ std::vector<std::vector<double>> do_benchmarking(std::function<void()> op){
             min_t_auto = Halide::Tools::benchmark(1, 1, [&]() { op(); }); // min_t_auto is in seconds [SD] 
             iterations.push_back(min_t_auto * 1e3); // ms
         }
-        // min.push_back( *min_element(iterations.begin(), iterations.end()) );
-        // max.push_back( *max_element(iterations.begin(), iterations.end()) );
-        // avg.push_back(  accumulate( iterations.begin(), iterations.end(), 0.0)/iterations.size() ); 
     }
-
-    // std::vector<double> wc_tuple(2), avg_tuple(2), bc_tuple(2);
-    // bc_tuple  = get_normal_dist_tuple(min);
-    // avg_tuple = get_normal_dist_tuple(avg);
-    // wc_tuple  = get_normal_dist_tuple(max);
 
     // return {bc_tuple, avg_tuple, wc_tuple};
     return {iterations};
 
 }
-
-/*void do_instr_benchmarking(std::function<void()> op){
-    PROFILE_SCOPED()
-    op();
-    Profiler::dump();
-}*/

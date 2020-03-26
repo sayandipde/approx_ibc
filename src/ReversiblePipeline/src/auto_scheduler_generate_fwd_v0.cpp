@@ -1,4 +1,34 @@
-// Halide tutorial lesson 21: Auto-Scheduler
+/*
+ *  Copyright (c) 2020 sayandipde
+ *  Eindhoven University of Technology
+ *  Eindhoven, The Netherlands
+ *
+ *  Name            :   image_signal_processing.cpp
+ *
+ *  Authors         :   Sayandip De (sayandip.de@tue.nl)
+ *						Sajid Mohamed (s.mohamed@tue.nl)
+ *
+ *  Date            :   March 26, 2020
+ *
+ *  Function        :   pipeline version 0
+ *
+ *  History         :
+ *      26-03-20    :   Initial version.
+ *						Code is modified from https://github.com/mbuckler/ReversiblePipeline [written by Mark Buckler]. 
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ */
 
 #include "Halide.h"
 
@@ -80,9 +110,6 @@ public:
 
     void schedule() {
        if(!auto_schedule){
-
-            // Target: x86-64-linux-avx-avx2-f16c-fma-sse41
-            // MachineParams: 4,8000000,40
 
             // Delete this line if not using Generator
             Pipeline pipeline = get_pipeline();
@@ -209,55 +236,4 @@ private:
 
 } // namespace
 
-// As in lesson 15, we register our generator and then compile this
-// file along with tools/GenGen.cpp.
 HALIDE_REGISTER_GENERATOR(AutoScheduled, auto_schedule_gen_fwd_v0)
-
-
-
-        // Technically, the estimate values can be anything, but the closer
-        // they are to the actual use-case values, the better the generated
-        // schedule will be.
-
-        // To auto-schedule the the pipeline, we don't have to do anything else:
-        // every Generator implicitly has a GeneratorParam named "auto_schedule";
-        // if this is set to true, Halide will call auto_schedule() on all of
-        // our pipeline's outputs automatically.
-
-        // Every Generator also implicitly has a GeneratorParams named "machine_params",
-        // which allows you to specify characteristics of the machine architecture
-        // for the auto-scheduler; it's generally specified in your Makefile.
-        // If none is specified, the default machine parameters for a generic CPU
-        // architecture will be used by the auto-scheduler.
-
-        // Let's see some arbitrary but plausible values for the machine parameters.
-        //
-        //      const int kParallelism = 32;
-        //      const int kLastLevelCacheSize = 16 * 1024 * 1024;
-        //      const int kBalance = 40;
-        //      MachineParams machine_params(kParallelism, kLastLevelCacheSize, kBalance);
-        //      DEFAULT machine_params=32,16777216,40
-        //  
-        // The arguments to MachineParams are the maximum level of parallelism
-        // available, the size of the last-level cache (in KB), and the ratio
-        // between the cost of a miss at the last level cache and the cost
-        // of arithmetic on the target architecture, in that order.
-
-        // Note that when using the auto-scheduler, no schedule should have
-        // been applied to the pipeline; otherwise, the auto-scheduler will
-        // throw an error. The current auto-scheduler cannot handle a
-        // partially-scheduled pipeline.
-
-        // If HL_DEBUG_CODEGEN is set to 3 or greater, the schedule will be dumped
-        // to stdout (along with much other information); a more useful way is
-        // to add "schedule" to the -e flag to the Generator. (In CMake and Bazel,
-        // this is done using the "extra_outputs" flag.)
-
-        // The generated schedule that is dumped to file is an actual
-        // Halide C++ source, which is readily copy-pasteable back into
-        // this very same source file with few modifications. Programmers
-        // can use this as a starting schedule and iteratively improve the
-        // schedule. Note that the current auto-scheduler is only able to
-        // generate CPU schedules and only does tiling, simple vectorization
-        // and parallelization. It doesn't deal with line buffering, storage
-        // reordering, or factoring reductions.

@@ -1,12 +1,35 @@
-// Halide tutorial lesson 21: Auto-Scheduler
-
-// Before reading this file, see lesson_21_auto_scheduler_generate.cpp
-
-// This is the code that actually uses the Halide pipeline we've
-// compiled. It does not depend on libHalide, so we won't be including
-// Halide.h.
-//
-// Instead, it depends on the header files that lesson_21_auto_scheduler_generator produced.
+/*
+ *  Copyright (c) 2020 sayandipde
+ *  Eindhoven University of Technology
+ *  Eindhoven, The Netherlands
+ *
+ *  Name            :   image_signal_processing.cpp
+ *
+ *  Authors         :   Sayandip De (sayandip.de@tue.nl)
+ *						Sajid Mohamed (s.mohamed@tue.nl)
+ *
+ *  Date            :   March 26, 2020
+ *
+ *  Function        :   main file to run different pipelines
+ *
+ *  History         :
+ *      26-03-20    :   Initial version.
+ *						Code is modified from https://github.com/mbuckler/ReversiblePipeline [written by Mark Buckler]. 
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ */
+ 
 #include "auto_schedule_true_rev.h"
 #include "auto_schedule_true_fwd_v0.h"
 #include "auto_schedule_true_fwd_v1.h"
@@ -16,8 +39,6 @@
 #include "auto_schedule_true_fwd_v5.h"
 #include "auto_schedule_true_fwd_v6.h"
 
-// We'll use the Halide::Runtime::Buffer class for passing data into and out of
-// the pipeline.
 #include "Halide.h"
 #include "halide_benchmark.h"
 #include "halide_image_io.h"
@@ -28,27 +49,6 @@
 #include <stdio.h>
 #include <math.h>
 #include <iostream>
-
-
-/////////////////////////////////////////////////////////////////////////////////////////
-// Image Processing Pipeline
-//
-// This is a Halide implementation of a pre-learned image 
-// processing model. A description of the model can be found in
-// "A New In-Camera Imaging Model for Color Computer Vision 
-// and its Application" by Seon Joo Kim, Hai Ting Lin, 
-// Michael Brown, et al. Code for learning a new model can 
-// be found at the original project page. This particular 
-// implementation was written by Mark Buckler.
-//
-// Original Project Page:
-// http://www.comp.nus.edu.sg/~brown/radiometric_calibration/
-//
-// Model Format Readme:
-// http://www.comp.nus.edu.sg/~brown/radiometric_calibration/datasets/Model_param/readme.pdf
-//
-/////////////////////////////////////////////////////////////////////////////////////////
-
 
 
 // Function prototypes
@@ -368,10 +368,3 @@ int run_pipeline(bool direction) {
 
   return 0;
 }
-
-// benchmark(int samples, int iterations, std::function<void()> op)
-//
-// Benchmarks the operation 'op'. The number of iterations refers to
-// how many times the operation is run for each time measurement, the
-// result is the minimum over a number of samples runs. The result is the
-// amount of time in seconds for one iteration.

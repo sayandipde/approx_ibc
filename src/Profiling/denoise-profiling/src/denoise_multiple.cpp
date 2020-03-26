@@ -1,3 +1,34 @@
+/*
+ *  Copyright (c) 2020 sayandipde
+ *  Eindhoven University of Technology
+ *  Eindhoven, The Netherlands
+ *
+ *  Name            :   image_signal_processing.cpp
+ *
+ *  Authors         :   Sayandip De (sayandip.de@tue.nl)
+ *						Sajid Mohamed (s.mohamed@tue.nl)
+ *
+ *  Date            :   March 26, 2020
+ *
+ *  Function        :   run denoise-cpu profiling with multiple image workloads
+ *
+ *  History         :
+ *      26-03-20    :   Initial version. 
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ */
+
 #include <cstdio>
 //#include <chrono>
 #include <iostream> 
@@ -77,11 +108,6 @@ int main(int argc, char **argv) {
 			 wc_avg_bc_tuples = do_benchmarking( [&]() {
 				nl_means(input, patch_size, search_area, sigma, output);
 			} );
-			// printf("bc  {mean, stdev}: {%f, %f}\n", wc_avg_bc_tuples[0][0], wc_avg_bc_tuples[0][1]);  
-			// printf("avg {mean, stdev}: {%f, %f}\n", wc_avg_bc_tuples[1][0], wc_avg_bc_tuples[1][1]);  
-			// printf("wc  {mean, stdev}: {%f, %f}\n", wc_avg_bc_tuples[2][0], wc_avg_bc_tuples[2][1]);  
-		  // std::ofstream outfile("results.csv");
-		  // write_container(wc_avg_bc_tuples[0], outfile);
 
 			write_container(wc_avg_bc_tuples[0], outfile, "img_"+to_string(i));
 			outfile << "\n";
@@ -91,33 +117,5 @@ int main(int argc, char **argv) {
 			#endif
 		}
 	}
-    // // sampling 
-    // BenchmarkConfig config;
-    // config.accuracy = 0.001;
-    // BenchmarkResult result{0, 0, 0};
-    // result = Halide::Tools::benchmark( [&](){ nl_means(input, patch_size, search_area, sigma, output); }, config );
-    // cout << "\nBest elapsed wall-clock time per iteration (ms)           : " << result.wall_time * 1e3 << endl;
-    // cout << "Number of samples used for measurement                    : " << result.samples << endl;
-    // cout << "Total number of iterations across all samples             : " << result.iterations << endl;
-    // cout << "Measured accuracy between the best and third-best result  : " << result.accuracy << endl;
-
-    // // instruction
-    // cout << "\n";
-    // do_instr_benchmarking([&](){nl_means(input, patch_size, search_area, sigma, output);});
-
-    // // Manually-tuned version
-    // double min_t_manual = benchmark(timing_iterations, 1, [&]() {
-    //     nl_means(input, patch_size, search_area, sigma, output);
-    // });
-    // printf("Manually-tuned time: %gms\n", min_t_manual * 1e3);
-    // double min_t1_auto = benchmark(timing_iterations, 1, [&]() {
-    //     nl_means(input, patch_size, search_area, sigma, output);
-    // });
-    // printf("Auto-scheduled time: %gms\n", min_t1_auto * 1e3);
-
-    // convert_and_save_image(output, argv[6]);
-	
-	
-
     return 0;
 }

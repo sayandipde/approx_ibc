@@ -1,4 +1,34 @@
-// Halide tutorial lesson 21: Auto-Scheduler
+/*
+ *  Copyright (c) 2020 sayandipde
+ *  Eindhoven University of Technology
+ *  Eindhoven, The Netherlands
+ *
+ *  Name            :   image_signal_processing.cpp
+ *
+ *  Authors         :   Sayandip De (sayandip.de@tue.nl)
+ *						Sajid Mohamed (s.mohamed@tue.nl)
+ *
+ *  Date            :   March 26, 2020
+ *
+ *  Function        :   approximate pipeline version 5
+ *
+ *  History         :
+ *      26-03-20    :   Initial version.
+ *						Code is modified from https://github.com/mbuckler/ReversiblePipeline [written by Mark Buckler]. 
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ */
 
 #include "Halide.h"
 
@@ -24,17 +54,6 @@ public:
 
         // Color map and white balance transform
         Func transform("transform");
-            // transform(x,y,c) = select(
-            //     // Perform matrix multiplication, set min of 0
-            //     c == 0, scale(x,y,0)      * TsTw_tran_h(0,0)
-            //           + scale(x,y,1)      * TsTw_tran_h(1,0)
-            //           + scale(x,y,2)      * TsTw_tran_h(2,0),
-            //     c == 1, scale(x,y,0)      * TsTw_tran_h(0,1)
-            //           + scale(x,y,1)      * TsTw_tran_h(1,1)
-            //           + scale(x,y,2)      * TsTw_tran_h(2,1),
-            //             scale(x,y,0)      * TsTw_tran_h(0,2)
-            //           + scale(x,y,1)      * TsTw_tran_h(1,2)
-            //           + scale(x,y,2)      * TsTw_tran_h(2,2) );
             transform(x,y,c) = scale(x,y,c);
 
         // Weighted radial basis function for gamut mapping
@@ -65,18 +84,7 @@ public:
                         rbf_ctrl_pts(x,y,2) + coefs_h(0,2)                  + coefs_h(1,2)*transform(x,y,0) +
                                               coefs_h(2,2)*transform(x,y,1) + coefs_h(3,2)*transform(x,y,2))
                                     , 0);
-
-        // // Forward tone mapping
-        // Func tonemap("tonemap");
-        //     RDom idx2(0,256);
-        //     // Theres a lot in this one line! Functionality wise it finds the entry in 
-        //     // the reverse tone mapping function which is closest to the value found by
-        //     // gamut mapping. The output is then cast to uint8 for output. Effectively 
-        //     // it reverses the reverse tone mapping function.
-        //     tonemap(x,y,c) = cast<uint8_t>(argmin( abs( rev_tone_h(c,idx2) - rbf_biases(x,y,c) ) )[0]);
-        
-        // output processed image
-        // processed(x, y, c) = tonemap(x, y, c); 
+ 
        processed(x, y, c) = cast<uint8_t>( min( max( rbf_biases(x,y,c) * 255, 0), 255 ) );  
     }
 
@@ -158,55 +166,4 @@ private:
 
 } // namespace
 
-// As in lesson 15, we register our generator and then compile this
-// file along with tools/GenGen.cpp.
 HALIDE_REGISTER_GENERATOR(AutoScheduled, auto_schedule_gen_fwd_v5)
-
-
-
-        // Technically, the estimate values can be anything, but the closer
-        // they are to the actual use-case values, the better the generated
-        // schedule will be.
-
-        // To auto-schedule the the pipeline, we don't have to do anything else:
-        // every Generator implicitly has a GeneratorParam named "auto_schedule";
-        // if this is set to true, Halide will call auto_schedule() on all of
-        // our pipeline's outputs automatically.
-
-        // Every Generator also implicitly has a GeneratorParams named "machine_params",
-        // which allows you to specify characteristics of the machine architecture
-        // for the auto-scheduler; it's generally specified in your Makefile.
-        // If none is specified, the default machine parameters for a generic CPU
-        // architecture will be used by the auto-scheduler.
-
-        // Let's see some arbitrary but plausible values for the machine parameters.
-        //
-        //      const int kParallelism = 32;
-        //      const int kLastLevelCacheSize = 16 * 1024 * 1024;
-        //      const int kBalance = 40;
-        //      MachineParams machine_params(kParallelism, kLastLevelCacheSize, kBalance);
-        //      DEFAULT machine_params=32,16777216,40
-        //  
-        // The arguments to MachineParams are the maximum level of parallelism
-        // available, the size of the last-level cache (in KB), and the ratio
-        // between the cost of a miss at the last level cache and the cost
-        // of arithmetic on the target architecture, in that order.
-
-        // Note that when using the auto-scheduler, no schedule should have
-        // been applied to the pipeline; otherwise, the auto-scheduler will
-        // throw an error. The current auto-scheduler cannot handle a
-        // partially-scheduled pipeline.
-
-        // If HL_DEBUG_CODEGEN is set to 3 or greater, the schedule will be dumped
-        // to stdout (along with much other information); a more useful way is
-        // to add "schedule" to the -e flag to the Generator. (In CMake and Bazel,
-        // this is done using the "extra_outputs" flag.)
-
-        // The generated schedule that is dumped to file is an actual
-        // Halide C++ source, which is readily copy-pasteable back into
-        // this very same source file with few modifications. Programmers
-        // can use this as a starting schedule and iteratively improve the
-        // schedule. Note that the current auto-scheduler is only able to
-        // generate CPU schedules and only does tiling, simple vectorization
-        // and parallelization. It doesn't deal with line buffering, storage
-        // reordering, or factoring reductions.

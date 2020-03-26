@@ -6,8 +6,7 @@ processing model. A description of the model can be found in
 and its Application" by Seon Joo Kim, Hai Ting Lin, Zheng Lu,
 Sabine Susstrunk, Stephen Lin, and Michael S. Brown. Code for
 learning a new model can be found at the original project 
-page. This particular implementation was written by 
-Mark Buckler.
+page. This particular implementation was modified from https://github.com/mbuckler/ReversiblePipeline [written by Mark Buckler].
 
 If you are looking for the full Configurable & Reversible Imaging Pipeline (CRIP) as seen in the paper [Reconfiguring the Imaging Pipeline for Computer Vision](https://arxiv.org/abs/1705.04352) by Mark Buckler, Suren Jayasuriya, and Adrian Sampson, see [this repository](https://github.com/cucapra/approx-vision) instead.
 
