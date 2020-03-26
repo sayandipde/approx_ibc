@@ -6,7 +6,7 @@
  *  Name            :   image_signal_processing.cpp
  *
  *  Authors         :   Sayandip De (sayandip.de@tue.nl)
- *						Sajid Mohamed (s.mohamed@tue.nl)
+ *			Sajid Mohamed (s.mohamed@tue.nl)
  *
  *  Date            :   March 26, 2020
  *
