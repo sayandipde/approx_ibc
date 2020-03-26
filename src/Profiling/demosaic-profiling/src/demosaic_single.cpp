@@ -6,7 +6,7 @@
  *  Name            :   image_signal_processing.cpp
  *
  *  Authors         :   Sayandip De (sayandip.de@tue.nl)
- *						Sajid Mohamed (s.mohamed@tue.nl)
+ *			Sajid Mohamed (s.mohamed@tue.nl)
  *
  *  Date            :   March 26, 2020
  *
@@ -14,7 +14,7 @@
  *
  *  History         :
  *      26-03-20    :   Initial version.
- *						Code is modified from https://github.com/mbuckler/ReversiblePipeline [written by Mark Buckler]. 
+ *			Code is modified from https://github.com/mbuckler/ReversiblePipeline [written by Mark Buckler]. 
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
