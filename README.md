@@ -4,7 +4,9 @@ Tested using the following versions. If you would like to use latest versions, y
 
 If you are using this simulator in any form in your work, please cite:
 ```
-S. De, S. Mohamed, K. Bimpisidis, D. Goswami, T. Basten, and H. Corporaal, “Approximation trade offs in an image-based control system,” in: Design, Automation and Test in Europe (DATE), 2020.
+S. De, S. Mohamed, K. Bimpisidis, D. Goswami, T. Basten and H. Corporaal, "Approximation Trade Offs in an Image-Based Control System," 2020 Design, Automation & Test in Europe Conference & Exhibition (DATE), Grenoble, France, 2020, pp. 1680-1685, doi: 10.23919/DATE48585.2020.9116552.
+
+S. De, S. Mohamed, D. Goswami and H. Corporaal, "Approximation-Aware Design of an Image-Based Control System," in IEEE Access, vol. 8, pp. 174568-174586, 2020, doi: 10.1109/ACCESS.2020.3023047.
 ```
 
 Tested with the following versions:
