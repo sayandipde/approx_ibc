@@ -113,8 +113,8 @@ We checkout a specific version as the syntax of codes in Approx_IBC is based on 
 ```
 cd $(root)/externalApps
 git clone https://github.com/halide/Halide.git
-git checkout 810a14b1cef3eb99c4051a2a7ca0c50a9872c37c
 cd Halide
+git checkout 810a14b1cef3eb99c4051a2a7ca0c50a9872c37c
 gedit Makefile
 ```
 Append ` -D_GLIBCXX_USE_CXX11_ABI=0` to lines 95 and 222 (there is a space in front) to the `Makefile`. This appends the flag `-D_GLIBCXX_USE_CXX11_ABI=0` to `LLVM_CXX_FLAGS` and `TEST_CXX_FLAGS`. Save and close the `Makefile`.
