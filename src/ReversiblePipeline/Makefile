@@ -136,7 +136,7 @@ clean:
 
 $(OBJ_DIR)/auto_scheduler_generate_fwd_v0.o: src/auto_scheduler_generate_fwd_v0.cpp $(HALIDE_PATH)/include/Halide.h $(HALIDE_PATH)/tools/GenGen.cpp | $(OBJ_DIR)
 	$(info ************ Compiling $@ **********)
-	$(CXX) $^ $(HALIDE_PATH)/tools/GenGen.cpp $(CPPFLAGS)  $(HALIDE_FLAGS) $(CFLAGS) $(LDFLAGS)  `libpng-config --cflags --ldflags` `pkg-config opencv --cflags --libs` $(LDLIBS) -o $@ -std=c++11	
+	$(CXX) $^ $(CPPFLAGS)  $(HALIDE_FLAGS) $(CFLAGS) $(LDFLAGS)  `libpng-config --cflags --ldflags` `pkg-config opencv --cflags --libs` $(LDLIBS) -o $@ -std=c++11	
 	cp $@ $(IMACSROOT)/obj
 	
 $(OBJ_DIR):
@@ -144,37 +144,38 @@ $(OBJ_DIR):
 	
 $(OBJ_DIR)/auto_scheduler_generate_fwd_v1.o: src/auto_scheduler_generate_fwd_transform_tonemap_v1.cpp $(HALIDE_PATH)/include/Halide.h $(HALIDE_PATH)/tools/GenGen.cpp
 	$(info ************ Compiling $@ **********)
-	$(CXX) $^ $(HALIDE_PATH)/tools/GenGen.cpp $(CPPFLAGS)  $(HALIDE_FLAGS) $(CFLAGS) $(LDFLAGS)  `libpng-config --cflags --ldflags` `pkg-config opencv --cflags --libs` $(LDLIBS) -o $@ -std=c++11	
+	export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$(HALIDE_PATH)/bin
+	$(CXX) $^ $(CPPFLAGS)  $(HALIDE_FLAGS) $(CFLAGS) $(LDFLAGS)  `libpng-config --cflags --ldflags` `pkg-config opencv --cflags --libs` $(LDLIBS) -o $@ -std=c++11	
 	cp $@ $(IMACSROOT)/obj
 	
 $(OBJ_DIR)/auto_scheduler_generate_fwd_v2.o: src/auto_scheduler_generate_fwd_transform_gamut_v2.cpp $(HALIDE_PATH)/include/Halide.h $(HALIDE_PATH)/tools/GenGen.cpp
 	$(info ************ Compiling $@ **********)
-	$(CXX) $^ $(HALIDE_PATH)/tools/GenGen.cpp $(CPPFLAGS)  $(HALIDE_FLAGS) $(CFLAGS) $(LDFLAGS)  `libpng-config --cflags --ldflags` `pkg-config opencv --cflags --libs` $(LDLIBS) -o $@ -std=c++11	
+	$(CXX) $^ $(CPPFLAGS)  $(HALIDE_FLAGS) $(CFLAGS) $(LDFLAGS)  `libpng-config --cflags --ldflags` `pkg-config opencv --cflags --libs` $(LDLIBS) -o $@ -std=c++11	
 	cp $@ $(IMACSROOT)/obj
 	
 $(OBJ_DIR)/auto_scheduler_generate_fwd_v3.o: src/auto_scheduler_generate_fwd_gamut_tonemap_v3.cpp $(HALIDE_PATH)/include/Halide.h $(HALIDE_PATH)/tools/GenGen.cpp
 	$(info ************ Compiling $@ **********)
-	$(CXX) $^ $(HALIDE_PATH)/tools/GenGen.cpp $(CPPFLAGS)  $(HALIDE_FLAGS) $(CFLAGS) $(LDFLAGS)  `libpng-config --cflags --ldflags` `pkg-config opencv --cflags --libs` $(LDLIBS) -o $@ -std=c++11	
+	$(CXX) $^ $(CPPFLAGS)  $(HALIDE_FLAGS) $(CFLAGS) $(LDFLAGS)  `libpng-config --cflags --ldflags` `pkg-config opencv --cflags --libs` $(LDLIBS) -o $@ -std=c++11	
 	cp $@ $(IMACSROOT)/obj
 	
 $(OBJ_DIR)/auto_scheduler_generate_fwd_v4.o: src/auto_scheduler_generate_fwd_transform_v4.cpp $(HALIDE_PATH)/include/Halide.h $(HALIDE_PATH)/tools/GenGen.cpp
 	$(info ************ Compiling $@ **********)
-	$(CXX) $^ $(HALIDE_PATH)/tools/GenGen.cpp $(CPPFLAGS)  $(HALIDE_FLAGS) $(CFLAGS) $(LDFLAGS)  `libpng-config --cflags --ldflags` `pkg-config opencv --cflags --libs` $(LDLIBS) -o $@ -std=c++11	
+	$(CXX) $^ $(CPPFLAGS)  $(HALIDE_FLAGS) $(CFLAGS) $(LDFLAGS)  `libpng-config --cflags --ldflags` `pkg-config opencv --cflags --libs` $(LDLIBS) -o $@ -std=c++11	
 	cp $@ $(IMACSROOT)/obj
 	
 $(OBJ_DIR)/auto_scheduler_generate_fwd_v5.o: src/auto_scheduler_generate_fwd_gamut_v5.cpp $(HALIDE_PATH)/include/Halide.h $(HALIDE_PATH)/tools/GenGen.cpp
 	$(info ************ Compiling $@ **********)
-	$(CXX) $^ $(HALIDE_PATH)/tools/GenGen.cpp $(CPPFLAGS)  $(HALIDE_FLAGS) $(CFLAGS) $(LDFLAGS)  `libpng-config --cflags --ldflags` `pkg-config opencv --cflags --libs` $(LDLIBS) -o $@ -std=c++11	
+	$(CXX) $^ $(CPPFLAGS)  $(HALIDE_FLAGS) $(CFLAGS) $(LDFLAGS)  `libpng-config --cflags --ldflags` `pkg-config opencv --cflags --libs` $(LDLIBS) -o $@ -std=c++11	
 	cp $@ $(IMACSROOT)/obj
 	
 $(OBJ_DIR)/auto_scheduler_generate_fwd_v6.o: src/auto_scheduler_generate_fwd_tonemap_v6.cpp $(HALIDE_PATH)/include/Halide.h $(HALIDE_PATH)/tools/GenGen.cpp
 	$(info ************ Compiling $@ **********)
-	$(CXX) $^ $(HALIDE_PATH)/tools/GenGen.cpp $(CPPFLAGS)  $(HALIDE_FLAGS) $(CFLAGS) $(LDFLAGS)  `libpng-config --cflags --ldflags` `pkg-config opencv --cflags --libs` $(LDLIBS) -o $@ -std=c++11	
+	$(CXX) $^ $(CPPFLAGS)  $(HALIDE_FLAGS) $(CFLAGS) $(LDFLAGS)  `libpng-config --cflags --ldflags` `pkg-config opencv --cflags --libs` $(LDLIBS) -o $@ -std=c++11	
 	cp $@ $(IMACSROOT)/obj
 	
 $(OBJ_DIR)/auto_scheduler_generate_rev.o: src/auto_scheduler_generate_rev.cpp $(HALIDE_PATH)/include/Halide.h $(HALIDE_PATH)/tools/GenGen.cpp
 	$(info ************ Compiling $@ **********)
-	$(CXX) $^ $(HALIDE_PATH)/tools/GenGen.cpp $(CPPFLAGS)  $(HALIDE_FLAGS) $(CFLAGS) $(LDFLAGS)  `libpng-config --cflags --ldflags` `pkg-config opencv --cflags --libs` $(LDLIBS) -o $@ -std=c++11	
+	$(CXX) $^ $(CPPFLAGS)  $(HALIDE_FLAGS) $(CFLAGS) $(LDFLAGS)  `libpng-config --cflags --ldflags` `pkg-config opencv --cflags --libs` $(LDLIBS) -o $@ -std=c++11	
 	cp $@ $(IMACSROOT)/obj
 	
 $(OBJ_DIR)/auto_scheduler_run.o: src/auto_scheduler_run.cpp src/LoadCamModel.cpp src/MatrixOps.cpp $(LIB_DIR)auto_schedule_true_rev.a $(LIB_DIR)auto_schedule_true_fwd_v0.a $(LIB_DIR)auto_schedule_true_fwd_v1.a $(LIB_DIR)auto_schedule_true_fwd_v2.a $(LIB_DIR)auto_schedule_true_fwd_v3.a $(LIB_DIR)auto_schedule_true_fwd_v4.a $(LIB_DIR)auto_schedule_true_fwd_v5.a $(LIB_DIR)auto_schedule_true_fwd_v6.a $(HALIDE_PATH)/tools/halide_benchmark.h $(HALIDE_PATH)/tools/halide_image_io.h $(HALIDE_PATH)/tools/halide_image.h $(HALIDE_PATH)/include/Halide.h include/LoadCamModel.h include/MatrixOps.h
@@ -188,6 +189,6 @@ $(OBJ_DIR)/auto_scheduler_run.o: src/auto_scheduler_run.cpp src/LoadCamModel.cpp
 	$(CFLAGS) $(LDFLAGS) -DHALIDE_NO_JPEG `libpng-config --cflags --ldflags` \
 	`pkg-config opencv --cflags --libs` $(LDLIBS) -o $@ -std=c++11	
 	cp $@ $(IMACSROOT)/obj
-	################  IMACS install success  ############################
+	################  IMACS Reversible Pipeline install success  ############################
 	
 	
