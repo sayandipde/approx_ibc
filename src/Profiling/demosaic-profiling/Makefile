@@ -62,7 +62,8 @@ clean:
 
 # Indicate dependencies of .ccp files on .hpp files
 $(OBJ_DIR)/auto_scheduler_generate_fwd.o: src/auto_scheduler_generate_fwd.cpp $(HALIDE_PATH)/include/Halide.h $(HALIDE_PATH)/tools/GenGen.cpp | $(OBJ_DIR)
-	$(CXX) $^ $(HALIDE_PATH)/tools/GenGen.cpp $(CPPFLAGS)  $(HALIDE_FLAGS) $(CFLAGS) $(LDFLAGS)  `libpng-config --cflags --ldflags` $(LDLIBS) -fno-rtti -o $@ -std=c++11
+	export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$(HALIDE_PATH)/bin
+	$(CXX) $^ $(CPPFLAGS)  $(HALIDE_FLAGS) $(CFLAGS) $(LDFLAGS)  `libpng-config --cflags --ldflags` $(LDLIBS) -fno-rtti -o $@ -std=c++11
 $(OBJ_DIR):
 	mkdir $@  
 $(OBJ_DIR)/demosaic_multiple.o: src/demosaic_multiple.cpp src/auto_schedule_dem_fwd.h lib/auto_schedule_dem_fwd.a
